@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.Bot Ventures | AI-Powered Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0f1c;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --primary: #38ef7d;
+            --secondary: #11998e;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(56, 239, 125, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+            background: rgba(10, 15, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            font-size: 0.85rem;
+        }
+
+        .company-name {
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .company-address {
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 400;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+
+        .lang-btn {
+            padding: 6px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000;
+            box-shadow: 0 4px 12px rgba(56, 239, 125, 0.3);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(56, 239, 125, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 239, 125, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+        }
+
+        .glowing-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 239, 125, 0.15) 0%, rgba(17, 153, 142, 0.05) 40%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: pulse-orb 8s ease-in-out infinite;
+            filter: blur(40px);
+        }
+
+        @keyframes pulse-orb {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(56, 239, 125, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo-text {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.2s both;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 20px;
+            position: relative;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0d1221 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* FIXED: 2x2 Grid Layout for 4 Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Exactly 2 columns */
+            gap: 30px;
+            max-width: 1000px; /* Optimal width for 2x2 symmetry */
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(56, 239, 125, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 239, 125, 0.1);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(56, 239, 125, 0.3));
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .project-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            width: fit-content;
+            margin-top: auto;
+        }
+
+        .project-link:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
+        }
+
+        .project-link svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid var(--border);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .footer-address {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+                text-align: center;
+            }
+
+            .company-address {
+                font-size: 0.75rem;
+            }
+
+            .logo-text {
+                font-size: 2.8rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            /* Mobile: Stack cards vertically */
+            .projects-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .project-card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <a href="#" class="company-name">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Mr.Bot B.V.
+        </a>
+        <div class="company-address">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Herengracht 320, 1016 CE Amsterdam, Netherlands
+        </div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('en', event)">EN</button>
+            <button class="lang-btn" onclick="switchLanguage('nl', event)">NL</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="glowing-orb"></div>
+        
+        <div class="hero-content">
+            <div class="badge" data-en="Venture Studio" data-nl="Venture Studio">Venture Studio</div>
+            <h1 class="logo-text">Mr.Bot Ventures</h1>
+            <p class="tagline" data-en="Building the future of AI-native companies and intelligent ecosystems from the heart of Amsterdam." data-nl="We bouwen de toekomst van AI-native bedrijven en intelligente ecosystemen vanuit het hart van Amsterdam.">Building the future of AI-native companies and intelligent ecosystems from the heart of Amsterdam.</p>
+        </div>
+
+        <a href="#projects" class="scroll-indicator">
+            <span data-en="Explore Projects" data-nl="Ontdek Projecten">Explore Projects</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+        </a>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <h2 class="section-title" data-en="Our Portfolio" data-nl="Onze Portfolio">Our Portfolio</h2>
+            <p class="section-subtitle" data-en="Innovative side projects and ventures powered by the Mr.Bot platform." data-nl="Innovatieve nevenprojecten en ventures aangedreven door het Mr.Bot platform.">Innovative side projects and ventures powered by the Mr.Bot platform.</p>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- E-Mage -->
+            <div class="project-card">
+                <div class="project-icon">🚀</div>
+                <h3 class="project-title">E-Mage</h3>
+                <p class="project-description" data-en="Transform your company into an AI-native organization. E-Mage helps you optimize business processes and maximize productivity through artificial intelligence." data-nl="Transformeer uw bedrijf naar een AI-native organisatie. E-Mage helpt u bedrijfsprocessen te optimaliseren en productiviteit te maximaliseren door middel van kunstmatige intelligentie.">Transform your company into an AI-native organization. E-Mage helps you optimize business processes and maximize productivity through artificial intelligence.</p>
+                <a href="https://emage.ai" class="project-link" target="_blank">
+                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <!-- Dr.Bot -->
+            <div class="project-card">
+                <div class="project-icon">🏥</div>
+                <h3 class="project-title">Dr.Bot</h3>
+                <p class="project-description" data-en="A medical superagent with diverse capabilities including symptom checking, blood test analysis, Q7A, and direct doctor consultation. Your intelligent healthcare assistant." data-nl="Een medische superagent met diverse mogelijkheden, waaronder symptoomcontrole, bloedtestanalyse, Q7A en direct artsconsult. Uw intelligente zorgassistent.">A medical superagent with diverse capabilities including symptom checking, blood test analysis, Q7A, and direct doctor consultation. Your intelligent healthcare assistant.</p>
+                <a href="https://drbot.ai" class="project-link" target="_blank">
+                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <!-- QxLife -->
+            <div class="project-card">
+                <div class="project-icon">💪</div>
+                <h3 class="project-title">QxLife</h3>
+                <p class="project-description" data-en="A complete nutrition, fitness, and health ecosystem. QxLife is a superagent with diverse capabilities to improve your lifestyle, from personalized meal planning to customized workout routines." data-nl="Een compleet ecosysteem voor voeding, fitness en gezondheid. QxLife is een superagent met diverse mogelijkheden om uw levensstijl te verbeteren, van gepersonaliseerde maaltijdplanning tot aangepaste trainingsroutines.">A complete nutrition, fitness, and health ecosystem. QxLife is a superagent with diverse capabilities to improve your lifestyle, from personalized meal planning to customized workout routines.</p>
+                <a href="https://qxlife.ai" class="project-link" target="_blank">
+                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <!-- AgentFoundry (UPDATED LINK) -->
+            <div class="project-card">
+                <div class="project-icon">⚙️</div>
+                <h3 class="project-title">AgentFoundry</h3>
+                <p class="project-description" data-en="Empowering solo founders to build AI-native companies from scratch. We transform your vision into a fully operational multi-agent system on the Mr.Bot platform, serving as your autonomous, scalable workforce." data-nl="Het empoweren van solo-oprichters om vanaf nul AI-native bedrijven te bouwen. Wij veranderen uw visie in een volledig operationeel multi-agent systeem op het Mr.Bot platform, dat fungeert als uw autonome, schaalbare personeel.">Empowering solo founders to build AI-native companies from scratch. We transform your vision into a fully operational multi-agent system on the Mr.Bot platform, serving as your autonomous, scalable workforce.</p>
+                <a href="https://agentfoundry-mrbot.vercel.app" class="project-link" target="_blank">
+                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Mr.Bot B.V.</div>
+            <div class="footer-address">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Herengracht 320, 1016 CE Amsterdam, Netherlands
+            </div>
+            <p class="footer-copy" data-en="© 2026 Mr.Bot B.V. All rights reserved. Built with ❤️ for a smarter future." data-nl="© 2026 Mr.Bot B.V. Alle rechten voorbehouden. Gebouwd met ❤️ voor een slimmere toekomst.">© 2026 Mr.Bot B.V. All rights reserved. Built with ❤️ for a smarter future.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang, event) {
+            if(event) event.preventDefault();
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+                element.style.opacity = '0';
+                setTimeout(() => {
+                    element.textContent = element.getAttribute('data-' + lang);
+                    element.style.opacity = '1';
+                }, 150);
+            });
+
+            document.documentElement.lang = lang;
+        }
+
+        document.querySelectorAll('[data-en]').forEach(el => {
+            el.style.transition = 'opacity 0.15s ease';
+        });
+    </script>
+</body>
+</html>
