@@ -3,273 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr.Bot Ventures | AI-Powered Future</title>
+    <title>Q×Life | Quantified Life. Amplified You.</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0f1c;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --primary: #38ef7d;
-            --secondary: #11998e;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border: rgba(56, 239, 125, 0.15);
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'qx-black': '#0A0A0A',
+                        'qx-dark': '#121212',
+                        'qx-gray': '#1E1E1E',
+                        'qx-mint': '#00FF94',
+                        'qx-cyan': '#00F0FF',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #00FF94, 0 0 10px #00FF94, 0 0 15px #00F0FF' },
+                            '100%': { boxShadow: '0 0 10px #00FF94, 0 0 20px #00FF94, 0 0 30px #00F0FF' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    </script>
+    
+    <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: #0A0A0A;
+            color: #FFFFFF;
             overflow-x: hidden;
-            line-height: 1.6;
-            scroll-behavior: smooth;
         }
-        .top-bar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 40px; background: rgba(10, 15, 28, 0.85);
-            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; font-size: 0.85rem;
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #00FF94 0%, #00F0FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .company-name {
-            font-weight: 700; color: var(--primary); letter-spacing: 0.5px;
-            display: flex; align-items: center; gap: 8px; text-decoration: none;
+        
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .company-address { color: var(--text-muted); display: flex; align-items: center; gap: 6px; font-weight: 400; }
-        .lang-switcher {
-            display: flex; gap: 8px; background: rgba(255, 255, 255, 0.05);
-            padding: 4px; border-radius: 50px; border: 1px solid var(--border);
-        }
-        .lang-btn {
-            padding: 6px 16px; background: transparent; border: none; color: var(--text-muted);
-            cursor: pointer; border-radius: 50px; font-weight: 600; font-size: 0.8rem;
-            transition: all 0.3s ease; font-family: 'Inter', sans-serif;
-        }
-        .lang-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #000; box-shadow: 0 4px 12px rgba(56, 239, 125, 0.3);
-        }
-        .lang-btn:hover:not(.active) { color: var(--text-main); background: rgba(255, 255, 255, 0.1); }
-        .hero {
-            min-height: 85vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 120px 20px 80px; position: relative; overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
-            background-image: linear-gradient(rgba(56, 239, 125, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(56, 239, 125, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-        }
-        .glowing-orb {
-            position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(56, 239, 125, 0.15) 0%, rgba(17, 153, 142, 0.05) 40%, transparent 70%);
-            border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            z-index: 0; animation: pulse-orb 8s ease-in-out infinite; filter: blur(40px);
-        }
-        @keyframes pulse-orb {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-        }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; }
-        .badge {
-            display: inline-block; padding: 8px 20px; background: rgba(56, 239, 125, 0.1);
-            border: 1px solid var(--border); border-radius: 50px; color: var(--primary);
-            font-size: 0.85rem; font-weight: 600; margin-bottom: 30px;
-            letter-spacing: 1px; text-transform: uppercase; animation: fadeInDown 0.8s ease;
-        }
-        .logo-text {
-            font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; animation: fadeInUp 0.8s ease 0.2s both; letter-spacing: -1px;
-        }
-        .tagline {
-            font-size: 1.5rem; font-weight: 300; color: var(--text-muted); margin-bottom: 40px;
-            max-width: 600px; margin-left: auto; margin-right: auto; animation: fadeInUp 0.8s ease 0.4s both;
-        }
-        .scroll-indicator {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
-            color: var(--text-muted); font-size: 0.8rem; animation: bounce 2s infinite;
-            cursor: pointer; text-decoration: none;
-        }
-        .scroll-indicator svg { width: 24px; height: 24px; stroke: var(--primary); }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-        .projects-section {
-            padding: 100px 20px; position: relative;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #0d1221 100%);
-        }
-        .section-header { text-align: center; margin-bottom: 80px; }
-        .section-title { font-size: 2.8rem; font-weight: 700; margin-bottom: 16px; color: var(--text-main); }
-        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-        .projects-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 30px; max-width: 1000px; margin: 0 auto;
-        }
-        .project-card {
-            background: var(--bg-card); backdrop-filter: blur(20px); border-radius: 24px;
-            padding: 40px; border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; overflow: hidden; display: flex; flex-direction: column; height: 100%;
-        }
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-8px); background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(56, 239, 125, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 239, 125, 0.1);
-        }
-        .project-card:hover::before { transform: scaleX(1); }
-        .project-icon {
-            font-size: 3rem; margin-bottom: 24px; display: inline-block;
-            filter: drop-shadow(0 0 10px rgba(56, 239, 125, 0.3));
-        }
-        .project-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
-        .project-description { font-size: 1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 32px; flex-grow: 1; }
-        .project-link {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 28px; background: transparent; color: var(--primary);
-            text-decoration: none; border-radius: 12px; font-weight: 600;
-            transition: all 0.3s ease; border: 1px solid var(--border); width: fit-content; margin-top: auto;
-        }
-        .project-link:hover {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #000; border-color: transparent; box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
-        }
-        .project-link svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
-        .project-link:hover svg { transform: translateX(4px); }
-        footer { background: rgba(0, 0, 0, 0.3); border-top: 1px solid var(--border); padding: 60px 20px; text-align: center; }
-        .footer-content { max-width: 1200px; margin: 0 auto; }
-        .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
-        .footer-address { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .footer-copy { color: var(--text-muted); font-size: 0.85rem; opacity: 0.7; }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) {
-            .top-bar { flex-direction: column; gap: 12px; padding: 16px 20px; text-align: center; }
-            .company-address { font-size: 0.75rem; }
-            .logo-text { font-size: 2.8rem; }
-            .tagline { font-size: 1.1rem; }
-            .section-title { font-size: 2rem; }
-            .projects-grid { grid-template-columns: 1fr; max-width: 500px; }
-            .project-card { padding: 30px; }
+        
+        .glow-x {
+            animation: glow 2s ease-in-out infinite alternate;
         }
     </style>
 </head>
-<body>
-    <header class="top-bar">
-        <a href="https://ventures-mrbot.vercel.app" class="company-name">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            Mr.Bot B.V.
-        </a>
-        <div class="company-address">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            Herengracht 320, 1016 CE Amsterdam, Netherlands
-        </div>
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLanguage('en', event)">EN</button>
-            <button class="lang-btn" onclick="switchLanguage('nl', event)">NL</button>
-        </div>
-    </header>
+<body class="antialiased">
 
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="glowing-orb"></div>
-        <div class="hero-content">
-            <div class="badge" data-en="Venture Studio" data-nl="Venture Studio">Venture Studio</div>
-            <h1 class="logo-text">Mr.Bot Ventures</h1>
-            <p class="tagline" data-en="Building the future of AI-native companies and intelligent ecosystems from the heart of Amsterdam." data-nl="We bouwen de toekomst van AI-native bedrijven en intelligente ecosystemen vanuit het hart van Amsterdam.">Building the future of AI-native companies and intelligent ecosystems from the heart of Amsterdam.</p>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-qx-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-3xl font-bold tracking-tight">
+                        Q<span class="gradient-text glow-x">×</span>Life
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#features" class="hover:text-qx-mint transition-colors px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#ecosystem" class="hover:text-qx-mint transition-colors px-3 py-2 rounded-md text-sm font-medium">Ecosystem</a>
+                        <a href="#how-it-works" class="hover:text-qx-mint transition-colors px-3 py-2 rounded-md text-sm font-medium">How It Works</a>
+                        <a href="#qx-score" class="hover:text-qx-mint transition-colors px-3 py-2 rounded-md text-sm font-medium">Qx Score</a>
+                        <a href="#pricing" class="hover:text-qx-mint transition-colors px-3 py-2 rounded-md text-sm font-medium">Pricing</a>
+                        <button class="bg-gradient-to-r from-qx-mint to-qx-cyan text-qx-black px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">
+                            Get Early Access
+                        </button>
+                        <!-- Language Switcher -->
+                        <button class="text-sm border border-white/20 px-3 py-1 rounded-full hover:border-qx-mint transition-colors">
+                            FA
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a href="#projects" class="scroll-indicator">
-            <span data-en="Explore Projects" data-nl="Ontdek Projecten">Explore Projects</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
-        </a>
-    </section>
+    </nav>
 
-    <section class="projects-section" id="projects">
-        <div class="section-header">
-            <h2 class="section-title" data-en="Our Portfolio" data-nl="Onze Portfolio">Our Portfolio</h2>
-            <p class="section-subtitle" data-en="Innovative side projects and ventures powered by the Mr.Bot platform." data-nl="Innovatieve nevenprojecten en ventures aangedreven door het Mr.Bot platform.">Innovative side projects and ventures powered by the Mr.Bot platform.</p>
-        </div>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-b from-qx-mint/5 to-transparent"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-qx-mint/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-qx-cyan/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
         
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-icon">🚀</div>
-                <h3 class="project-title">E-Mage</h3>
-                <p class="project-description" data-en="Transform your company into an AI-native organization. E-Mage helps you optimize business processes and maximize productivity through artificial intelligence." data-nl="Transformeer uw bedrijf naar een AI-native organisatie. E-Mage helpt u bedrijfsprocessen te optimaliseren en productiviteit te maximaliseren door middel van kunstmatige intelligentie.">Transform your company into an AI-native organization. E-Mage helps you optimize business processes and maximize productivity through artificial intelligence.</p>
-                <a href="https://emage-mrbot.vercel.app" class="project-link" target="_blank">
-                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 animate-float">
+                <span class="w-2 h-2 bg-qx-mint rounded-full animate-pulse"></span>
+                <span class="text-sm text-gray-300">Now in Beta — Join 10,000+ early users</span>
+            </div>
+            
+            <!-- Main Heading -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
+                Quantified Life.<br>
+                <span class="gradient-text">Amplified You.</span>
+            </h1>
+            
+            <!-- Subheading -->
+            <p class="mt-6 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Measure what matters. Connect what matters.<br class="hidden md:block">
+                Your complete health ecosystem powered by AI.
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="group relative px-8 py-4 bg-gradient-to-r from-qx-mint to-qx-cyan text-qx-black rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-qx-mint/25">
+                    Start Your Journey
+                    <svg class="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+                <a href="https://demo.qxlife.mrbot.ventures/w/workspace_wellness/agents" target="_blank" rel="noopener noreferrer" class="group px-8 py-4 border border-white/20 rounded-full font-semibold text-lg hover:border-qx-mint hover:text-qx-mint transition-colors inline-flex items-center justify-center">
+                    <svg class="inline-block mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                    </svg>
+                    Watch Demo
+                    <svg class="inline-block ml-2 w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
                 </a>
             </div>
-
-            <div class="project-card">
-                <div class="project-icon">🏥</div>
-                <h3 class="project-title">Dr.Bot</h3>
-                <p class="project-description" data-en="A medical superagent with diverse capabilities including symptom checking, blood test analysis, Q7A, and direct doctor consultation. Your intelligent healthcare assistant." data-nl="Een medische superagent met diverse mogelijkheden, waaronder symptoomcontrole, bloedtestanalyse, Q7A en direct artsconsult. Uw intelligente zorgassistent.">A medical superagent with diverse capabilities including symptom checking, blood test analysis, Q7A, and direct doctor consultation. Your intelligent healthcare assistant.</p>
-                <a href="https://drbot-mrbot.vercel.app" class="project-link" target="_blank">
-                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">💪</div>
-                <h3 class="project-title">QxLife</h3>
-                <p class="project-description" data-en="A complete nutrition, fitness, and health ecosystem. QxLife is a superagent with diverse capabilities to improve your lifestyle, from personalized meal planning to customized workout routines." data-nl="Een compleet ecosysteem voor voeding, fitness en gezondheid. QxLife is een superagent met diverse mogelijkheden om uw levensstijl te verbeteren, van gepersonaliseerde maaltijdplanning tot aangepaste trainingsroutines.">A complete nutrition, fitness, and health ecosystem. QxLife is a superagent with diverse capabilities to improve your lifestyle, from personalized meal planning to customized workout routines.</p>
-                <a href="https://qxlife-mrbot.vercel.app" class="project-link" target="_blank">
-                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">⚙️</div>
-                <h3 class="project-title">AgentFoundry</h3>
-                <p class="project-description" data-en="Empowering solo founders to build AI-native companies from scratch. We transform your vision into a fully operational multi-agent system on the Mr.Bot platform, serving as your autonomous, scalable workforce." data-nl="Het empoweren van solo-oprichters om vanaf nul AI-native bedrijven te bouwen. Wij veranderen uw visie in een volledig operationeel multi-agent systeem op het Mr.Bot platform, dat fungeert als uw autonome, schaalbare personeel.">Empowering solo founders to build AI-native companies from scratch. We transform your vision into a fully operational multi-agent system on the Mr.Bot platform, serving as your autonomous, scalable workforce.</p>
-                <a href="https://agentfoundry-mrbot.vercel.app" class="project-link" target="_blank">
-                    <span data-en="Visit Website" data-nl="Bezoek Website">Visit Website</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold gradient-text">10K+</div>
+                    <div class="text-sm text-gray-400 mt-1">Active Users</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold gradient-text">4</div>
+                    <div class="text-sm text-gray-400 mt-1">Pillars Connected</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold gradient-text">98%</div>
+                    <div class="text-sm text-gray-400 mt-1">Accuracy Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold gradient-text">24/7</div>
+                    <div class="text-sm text-gray-400 mt-1">AI Monitoring</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Mr.Bot B.V.</div>
-            <div class="footer-address">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Herengracht 320, 1016 CE Amsterdam, Netherlands
+    <!-- Features Section -->
+    <section id="features" class="py-32 bg-qx-dark relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Four Pillars. <span class="gradient-text">One Unified Score.</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Nutrition × Sport × Health × Lifestyle — all connected through intelligent AI.
+                </p>
             </div>
-            <p class="footer-copy" data-en="© 2026 Mr.Bot B.V. All rights reserved. Built with ❤️ for a smarter future." data-nl="© 2026 Mr.Bot B.V. Alle rechten voorbehouden. Gebouwd met ❤️ voor een slimmere toekomst.">© 2026 Mr.Bot B.V. All rights reserved. Built with ❤️ for a smarter future.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature 1: Nutrition -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-shadow">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Nutrition</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">AI-powered meal planning, macro tracking, and personalized recommendations based on your goals.</p>
+                </div>
+                
+                <!-- Feature 2: Sport -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-orange-500/50 transition-shadow">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Adaptive Training</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Workout plans that adapt to your performance, recovery, and real-time biometric data.</p>
+                </div>
+                
+                <!-- Feature 3: Health -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-shadow">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Health Monitoring</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Continuous health tracking, symptom analysis, and intelligent triage powered by medical AI.</p>
+                </div>
+                
+                <!-- Feature 4: Lifestyle -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-400 to-pink-600 rounded-xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-shadow">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Lifestyle Balance</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Sleep optimization, stress management, and habit tracking for holistic wellbeing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem Section -->
+    <section id="ecosystem" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-qx-mint/5 via-transparent to-qx-cyan/5"></div>
+
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                    <span class="w-2 h-2 bg-qx-mint rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">AI Agent Network</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Your Nutrition, Fitness <span class="gradient-text">& Health Ecosystem</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Behind every Qx Score is a network of specialized AI agents — each an expert in one part of your journey, working together around the clock.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Nutrition Domain -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center shrink-0">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Nutrition</h3>
+                            <span class="text-xs text-gray-500">1 AI Agent</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5">
+                            <svg class="w-5 h-5 text-qx-mint mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">Nutrition Agent</h4>
+                                <p class="text-gray-400 text-xs leading-relaxed">Analyzes your diet, plans meals, and tracks calories &amp; macronutrients in real time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fitness Domain -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-600 rounded-xl flex items-center justify-center shrink-0">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Fitness</h3>
+                            <span class="text-xs text-gray-500">2 AI Agents</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5">
+                            <svg class="w-5 h-5 text-orange-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">Fitness Agent</h4>
+                                <p class="text-gray-400 text-xs leading-relaxed">Designs personalized training plans and tracks your athletic performance and progress.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5">
+                            <svg class="w-5 h-5 text-orange-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">Sleep &amp; Recovery Agent</h4>
+                                <p class="text-gray-400 text-xs leading-relaxed">Optimizes rest cycles and recovery windows between training sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Domain -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-xl flex items-center justify-center shrink-0">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Health</h3>
+                            <span class="text-xs text-gray-500">2 AI Agents</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5">
+                            <svg class="w-5 h-5 text-qx-cyan mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">Health Monitoring Agent</h4>
+                                <p class="text-gray-400 text-xs leading-relaxed">Continuously tracks vital signs and overall wellbeing indicators.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5">
+                            <svg class="w-5 h-5 text-purple-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">Coach Agent</h4>
+                                <p class="text-gray-400 text-xs leading-relaxed">Delivers motivational coaching to keep you consistent and on track.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qx Score Section -->
+    <section id="qx-score" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-qx-cyan/5 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Your Life,<br>
+                        <span class="gradient-text">Quantified & Optimized.</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        The Qx Score is your single source of truth — a dynamic metric that combines all aspects of your health into one actionable number.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-qx-mint/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-qx-mint font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Data Collection</h4>
+                                <p class="text-gray-400 text-sm">Wearables, manual input, and AI analysis gather comprehensive health data.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-qx-cyan/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-qx-cyan font-bold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">AI Processing</h4>
+                                <p class="text-gray-400 text-sm">Advanced algorithms analyze patterns and correlations across all pillars.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-purple-500 font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Actionable Insights</h4>
+                                <p class="text-gray-400 text-sm">Personalized recommendations to improve your score and optimize your life.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Qx Score Visualization -->
+                <div class="relative">
+                    <div class="glass-card p-12 rounded-3xl text-center">
+                        <div class="relative w-64 h-64 mx-auto mb-8">
+                            <!-- Circular Progress -->
+                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="#1E1E1E" stroke-width="8"/>
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="8" 
+                                        stroke-dasharray="283" stroke-dashoffset="70" stroke-linecap="round"
+                                        class="animate-pulse"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#00FF94"/>
+                                        <stop offset="100%" stop-color="#00F0FF"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center flex-col">
+                                <span class="text-6xl font-bold gradient-text">76</span>
+                                <span class="text-sm text-gray-400 mt-2">Qx Score</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="glass-card p-3 rounded-lg">
+                                <div class="text-qx-mint font-bold text-lg">Nutrition</div>
+                                <div class="text-gray-400">82/100</div>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <div class="text-orange-500 font-bold text-lg">Sport</div>
+                                <div class="text-gray-400">71/100</div>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <div class="text-qx-cyan font-bold text-lg">Health</div>
+                                <div class="text-gray-400">78/100</div>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <div class="text-purple-500 font-bold text-lg">Lifestyle</div>
+                                <div class="text-gray-400">73/100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-32 bg-qx-dark">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Start in <span class="gradient-text">Minutes.</span>
+                </h2>
+                <p class="text-gray-400 text-lg">Three simple steps to a quantified you.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-qx-mint to-qx-cyan flex items-center justify-center text-qx-black text-3xl font-bold">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Connect Devices</h3>
+                    <p class="text-gray-400">Sync your wearables, fitness trackers, and health apps in one click.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-qx-mint to-qx-cyan flex items-center justify-center text-qx-black text-3xl font-bold">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Set Goals</h3>
+                    <p class="text-gray-400">Tell QxLife what matters to you — weight loss, performance, or longevity.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-qx-mint to-qx-cyan flex items-center justify-center text-qx-black text-3xl font-bold">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Optimize Daily</h3>
+                    <p class="text-gray-400">Get AI-powered insights and watch your Qx Score improve over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-qx-mint/10 to-transparent"></div>
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Ready to Multiply<br>
+                <span class="gradient-text">Your Life?</span>
+            </h2>
+            <p class="text-gray-400 text-xl mb-10">
+                Join thousands already optimizing their health with Q×Life.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-10 py-5 bg-gradient-to-r from-qx-mint to-qx-cyan text-qx-black rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl shadow-qx-mint/25">
+                    Get Early Access — Free
+                </button>
+                <button class="px-10 py-5 border border-white/20 rounded-full font-semibold text-lg hover:border-qx-mint hover:text-qx-mint transition-colors">
+                    Contact Sales
+                </button>
+            </div>
+            <p class="text-gray-500 text-sm mt-6">No credit card required • Cancel anytime</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-qx-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <span class="text-2xl font-bold">Q<span class="gradient-text">×</span>Life</span>
+                    <p class="text-gray-400 text-sm mt-4">Quantified Life. Amplified You.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">Features</a></li>
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">Twitter</a></li>
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-qx-mint transition-colors">Discord</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 Q×Life. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-qx-mint transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-qx-mint transition-colors">Terms</a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- Smooth Scroll Script -->
     <script>
-        function switchLanguage(lang, event) {
-            if(event) event.preventDefault();
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('[data-' + lang + ']').forEach(element => {
-                element.style.opacity = '0';
-                setTimeout(() => {
-                    element.textContent = element.getAttribute('data-' + lang);
-                    element.style.opacity = '1';
-                }, 150);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
-            document.documentElement.lang = lang;
-        }
-        document.querySelectorAll('[data-en]').forEach(el => { el.style.transition = 'opacity 0.15s ease'; });
+        });
     </script>
 </body>
 </html>
